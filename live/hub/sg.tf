@@ -2,7 +2,7 @@ module "sg" {
   source = "terraform-aws-modules/security-group/aws"
 
   name        = var.service
-  description = "dummy security group"
+  description = "default security group"
   vpc_id      = module.vpc.vpc_id
 
   ingress_rules = []
