@@ -46,17 +46,17 @@ This document walks you through deploying the **Hub-and-Spoke multi-account AWS 
 
 2. Initialize Terragrunt
 
-    `terragrunt run-all init`
+    `terragrunt run --all init`
 
 
 3. Preview the changes
 
-    `terragrunt run-all plan`
+    `terragrunt run --all plan`
 
 
 4. Apply the infrastructure
 
-    `terragrunt run-all apply`
+    `terragrunt run --all apply`
 
 Terragrunt will deploy the hub networking, share subnets via AWS RAM, and create resources in the spoke accounts.
 
@@ -68,7 +68,7 @@ Terragrunt will deploy the hub networking, share subnets via AWS RAM, and create
 ## Notes / Tips
 1. You can destroy everything by running:
 
-    `terragrunt run-all destroy`
+    `terragrunt run --all destroy`
 2. In this instance the management AWS account is used as the Hub account which allows using `OrganizationAccountAccessRole` for Spoke accounts deployments.
 
     This is the default IAM role AWS creates when you enable AWS Organizations. Terragrunt/Terraform assumes this role to deploy resources in the spoke accounts.
