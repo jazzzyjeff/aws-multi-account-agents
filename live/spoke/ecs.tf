@@ -67,6 +67,10 @@ module "ecs_service" {
         {
           name  = "AZP_TOKEN"
           value = var.ado["AZP_TOKEN"]
+        },
+        {
+          name  = "AZP_AGENT_NAME"
+          value = var.service
         }
       ]
     }
