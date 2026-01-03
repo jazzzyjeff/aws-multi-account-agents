@@ -8,23 +8,28 @@ A central *hub account* owns the VPC, subnets, and network services, while *spok
 
 ## Architecture
 
+![architecture diagram](/docs/architecture-diagram.png)
+
 - **Hub Account**
-  - Owns VPC, subnets, routing, NAT, and network security
-  - Shares private subnets with workload accounts using AWS RAM
+  - Owns VPC, subnets, routing, NAT, and network security.
+  - Shares private subnets with workload accounts using AWS RAM.
 
 - **Spoke Accounts**
-  - Deploy compute (EC2 / ECS / optional EKS)
-  - Maintain isolated IAM roles and workload ownership
-  - Consume centrally managed networking
+  - Deploy compute (EC2 / ECS / EKS).
+  - Maintain isolated IAM roles and workload ownership.
+  - Consume centrally managed networking.
+
+**Please note**
+- Currently only ECS is available, future scope will be implementing EC2 and EKS workloads.
 
 ## Features
 
-- Hub-and-spoke AWS multi-account design
-- Centralised VPC and subnet management
-- AWS RAM-based subnet sharing
-- ECS-based CI/CD agent deployment (example workload)
-- Clear separation of networking and workload concerns
-- Infrastructure-as-Code using Terraform
+- Hub-and-spoke AWS multi-account design.
+- Centralised VPC and subnet management.
+- AWS RAM-based subnet sharing.
+- ECS-based CI/CD agent deployment (example workload).
+- Clear separation of networking and workload concerns.
+- Infrastructure-as-Code using Terraform and Terragrunt.
 
 ## Repository Structure
 
@@ -39,10 +44,10 @@ docs/              # Architecture diagrams and additional documentation
 
 ## Design Goals
 
-- Minimise duplicated networking infrastructure across AWS accounts
-- Improve operational consistency and cost efficiency
-- Keep IAM and workloads isolated per account
-- Provide a reusable reference architecture for platform teams
+- Minimise duplicated networking infrastructure across AWS accounts.
+- Improve operational consistency and cost efficiency.
+- Keep IAM and workloads isolated per account.
+- Provide a reusable reference architecture for platform teams.
 
 ## Usage
 
