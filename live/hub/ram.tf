@@ -3,6 +3,8 @@ resource "aws_ram_resource_share" "this" {
   allow_external_principals = false
 
   tags = local.default_tags
+
+  depends_on = [aws_ram_sharing_with_organization.this]
 }
 
 resource "aws_ram_sharing_with_organization" "this" {}
