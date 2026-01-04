@@ -105,7 +105,11 @@ jobs:
           root: ${{ env.TERRAGRUNT_WORKING_DIRECTORY }}
 
       - name: Terragrunt Run
-        if: ${{ github.event.inputs.operation == 'deploy' }}
+        if: >
+          ${{
+            github.event.inputs.operation == 'deploy' ||
+            github.event.inputs.operation == ''
+          }}
         run: terragrunt run --all apply --non-interactive
         working-directory: ${{ env.TERRAGRUNT_WORKING_DIRECTORY }}
 
