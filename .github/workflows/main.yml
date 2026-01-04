@@ -28,12 +28,15 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    env:
+      TERRAGRUNT_DIR: terragrunt
 
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v5
         with:
           name: terragrunt
+          path: ${{ env.TERRAGRUNT_DIR }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v5.1.1
@@ -55,4 +58,4 @@ jobs:
 
       - name: Terragrunt Init
         run: terragrunt run --all init
-        working-directory: terragrunt
+        working-directory: ${{ env.TERRAGRUNT_DIR }}
