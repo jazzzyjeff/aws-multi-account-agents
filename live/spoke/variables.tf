@@ -28,10 +28,6 @@ variable "create_security_group" {
   nullable = false
 }
 
-variable "host" {
-  type = string
-}
-
 variable "build_context" {
   type = string
 }
