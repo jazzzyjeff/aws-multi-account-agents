@@ -46,5 +46,5 @@ inputs = {
   create_security_group = dependency.hub.outputs.ram_shared_resources.security_group == "sg-00000000000000000" ? false : true
   spoke_account_id      = include.root.locals.variables.spoke_account_id
   ado                   = include.root.locals.variables.ado
-  build_context         = "${get_repo_root()}/workloads/ado-agent"
+  build_context         = "../../workloads/ado-agent"
 }
