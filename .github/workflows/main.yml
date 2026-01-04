@@ -105,6 +105,10 @@ jobs:
       #   run: terragrunt run --all plan
       #   working-directory: ${{ env.TERRAGRUNT_WORKING_DIRECTORY }}
 
-      - name: Terragrunt Apply
-        run: terragrunt run --all apply --non-interactive
+      # - name: Terragrunt Apply
+      #   run: terragrunt run --all apply --non-interactive
+      #   working-directory: ${{ env.TERRAGRUNT_WORKING_DIRECTORY }}
+
+      - name: Terragrunt Destroy
+        run: terragrunt run --all destroy --non-interactive
         working-directory: ${{ env.TERRAGRUNT_WORKING_DIRECTORY }}
