@@ -14,19 +14,19 @@ variable "spoke_account_id" {
   type = string
 }
 
-variable "private_subnets" {
-  type = list(string)
-}
+# variable "private_subnets" {
+#   type = list(string)
+# }
 
-variable "security_group" {
-  type = list(string)
-}
+# variable "security_group" {
+#   type = list(string)
+# }
 
-variable "create_security_group" {
-  type     = bool
-  default  = true
-  nullable = false
-}
+# variable "create_security_group" {
+#   type     = bool
+#   default  = true
+#   nullable = false
+# }
 
 variable "build_context" {
   type = string
