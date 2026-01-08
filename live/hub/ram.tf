@@ -18,11 +18,6 @@ resource "aws_ram_resource_association" "subnets" {
   resource_share_arn = aws_ram_resource_share.this.arn
 }
 
-resource "aws_ram_resource_association" "sg" {
-  resource_arn       = module.sg.security_group_arn
-  resource_share_arn = aws_ram_resource_share.this.arn
-}
-
 resource "aws_ram_principal_association" "this" {
   principal          = data.aws_organizations_organization.this.arn
   resource_share_arn = aws_ram_resource_share.this.arn
