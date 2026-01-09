@@ -97,8 +97,29 @@ print_header "3. Configuring Azure Pipelines agent..."
 
 print_header "4. Running Azure Pipelines agent..."
 
-chmod +x ./run.sh
+if [ "$AZP_STACK" == "eks" ]; then
+  if ! grep -q "template" <<< "$AZP_AGENT_NAME"; then
+    echo "Cleanup Traps Enabled"
+    trap 'cleanup; exit 0' EXIT
+    trap 'cleanup; exit 130' INT
+    trap 'cleanup; exit 143' TERM
+  fi
 
-# To be aware of TERM and INT signals call ./run.sh
-# Running it with the --once flag at the end will shut down the agent after the build is executed
-./run.sh "$@" & wait $!
+  if [ "$AZP_KIND" == "deployment" ]; then
+    echo "Disabling agent step"
+    TOKEN=$(cat "$AZP_TOKEN_FILE")
+    getPoolId=$(curl -s -u :$TOKEN -H "Content-Type: application/json" "$AZP_URL/_apis/distributedtask/pools?poolName=${AZP_POOL:-Default}&api-version=6.0" | jq -r '.value[].id')
+    echo "Pool id: $getPoolId"
+    getAgentId=$(curl -s -u :$TOKEN -H "Content-Type: application/json" "$AZP_URL/_apis/distributedtask/pools/$getPoolId/agents?api-version=6.0" | jq -r '.value[] | select(.name == '\"${AZP_AGENT_NAME:-$(hostname)}\"').id')
+    echo "Deployment Agent id: $getAgentId"
+    echo "Disabling agent now"
+    status_code=$(curl --write-out %{http_code} -s -o /dev/null -u :$TOKEN -H "Content-Type: application/json" -d '{"enabled": false, "id": '\"$getAgentId\"' }' -X PATCH "$AZP_URL/_apis/distributedtask/pools/$getPoolId/agents/$getAgentId?api-version=5.0")
+    echo "Status code: $status_code"
+  fi
+
+  chmod +x ./run-docker.sh
+  ./run-docker.sh "$@" --once & wait $!
+else
+  chmod +x ./run.sh
+  ./run.sh "$@" & wait $!
+fi

@@ -98,6 +98,10 @@ module "ecs_service" {
         {
           name  = "AZP_AGENT_NAME"
           value = var.service
+        },
+        {
+          name  = "AZP_STACK"
+          value = var.stack
         }
       ]
     }

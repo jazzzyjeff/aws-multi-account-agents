@@ -10,5 +10,9 @@ terraform {
       source  = "kreuzwerker/docker"
       version = ">= 3.5.0"
     }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "3.1.1"
+    }
   }
 }
