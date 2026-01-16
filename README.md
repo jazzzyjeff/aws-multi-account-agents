@@ -55,4 +55,4 @@ See the documentation under /docs for deployment guidance.
 
 ## Author
 
-👤 Jazz
+👤 Jazzy Jeff
